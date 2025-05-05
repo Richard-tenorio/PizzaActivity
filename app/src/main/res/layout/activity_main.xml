@@ -1,1 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
+    <LinearLayout
+        android:id="@+id/main"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Pizza Type -->
+        <TextView android:text="Pizza Type" android:textStyle="bold"/>
+        <Spinner
+            android:id="@+id/spinnerPizza"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Pizza Size -->
+        <TextView android:text="Size" android:layout_marginTop="8dp" android:textStyle="bold"/>
+        <RadioGroup android:id="@+id/radioGroupSize">
+            <RadioButton android:id="@+id/radioSmall" android:text="Small"/>
+            <RadioButton android:id="@+id/radioMedium" android:text="Medium"/>
+            <RadioButton android:id="@+id/radioLarge" android:text="Large"/>
+        </RadioGroup>
+
+        <!-- Crust -->
+        <TextView android:text="Crust" android:layout_marginTop="8dp" android:textStyle="bold"/>
+        <RadioGroup android:id="@+id/radioGroupCrust">
+            <RadioButton android:id="@+id/radioThin" android:text="Thin"/>
+            <RadioButton android:id="@+id/radioThick" android:text="Thick"/>
+            <RadioButton android:id="@+id/radioCheeseStuffed" android:text="Cheese Stuffed"/>
+        </RadioGroup>
+
+        <!-- Toppings -->
+        <TextView android:text="Toppings" android:layout_marginTop="8dp" android:textStyle="bold"/>
+        <CheckBox android:id="@+id/checkboxPepperoni" android:text="Pepperoni"/>
+        <CheckBox android:id="@+id/checkboxMushrooms" android:text="Mushrooms"/>
+        <CheckBox android:id="@+id/checkboxOnions" android:text="Onions"/>
+        <CheckBox android:id="@+id/checkboxBacon" android:text="Bacon"/>
+
+        <!-- Buttons -->
+        <Button android:id="@+id/btnProcess" android:text="Process Order" android:layout_marginTop="16dp"/>
+        <Button android:id="@+id/btnClear" android:text="Clear" android:layout_marginTop="8dp"/>
+
+        <!-- Output -->
+        <TextView
+            android:id="@+id/txtOrderSummary"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtPriceBreakdown"
+            android:text="Price Breakdown:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtTotalPrice"
+            android:text="Total: ₱0"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#FF0000"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>
