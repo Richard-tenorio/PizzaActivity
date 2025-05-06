@@ -53,17 +53,29 @@ public class PizzaApp extends AppCompatActivity {
                 String crust = rbThin.isChecked() ? "Thin" :
                         rbThick.isChecked() ? "Thick" : "Unknown";
 
-                int price = 0;
-                switch (size) {
-                    case "Small": price += 200; break;
-                    case "Medium": price += 300; break;
-                    case "Large": price += 400; break;
+                // Determine base price based on pizza type and size
+                int basePrice = 0;
+                if (pizzaType.equals("Hawaiian")) {
+                    switch (size) {
+                        case "Small": basePrice = 100; break;
+                        case "Medium": basePrice = 150; break;
+                        case "Large": basePrice = 200; break;
+                    }
+                } else if (pizzaType.equals("Ham and Cheese")) {
+                    switch (size) {
+                        case "Small": basePrice = 200; break;
+                        case "Medium": basePrice = 300; break;
+                        case "Large": basePrice = 400; break;
+                    }
                 }
 
+                // Crust pricing
+                int crustPrice = 0;
                 if (crust.equals("Thick")) {
-                    price += 20;
+                    crustPrice = (int)(basePrice * 0.5); // 50% extra for thick crust
                 }
 
+                // Toppings
                 StringBuilder toppings = new StringBuilder();
                 int toppingCost = 0;
 
@@ -73,7 +85,7 @@ public class PizzaApp extends AppCompatActivity {
                 }
                 if (cbMushrooms.isChecked()) {
                     toppings.append("Mushrooms, ");
-                    toppingCost += 15;
+                    toppingCost += 20;
                 }
                 if (cbOnions.isChecked()) {
                     toppings.append("Onions, ");
@@ -81,23 +93,23 @@ public class PizzaApp extends AppCompatActivity {
                 }
                 if (cbTomatoes.isChecked()) {
                     toppings.append("Tomatoes, ");
-                    toppingCost += 12;
+                    toppingCost += 10;
                 }
                 if (cbPineapple.isChecked()) {
                     toppings.append("Pineapple, ");
-                    toppingCost += 18;
+                    toppingCost += 15;
                 }
 
                 if (toppings.length() > 0) {
-                    toppings.setLength(toppings.length() - 2); // Remove last comma
+                    toppings.setLength(toppings.length() - 2); // Remove last comma and space
                 }
 
-                price += toppingCost;
+                int totalPrice = basePrice + crustPrice + toppingCost;
 
                 String summary = "You ordered a " + size + " " + pizzaType + " Pizza\n"
                         + "Crust: " + crust + "\n"
                         + "Toppings: " + (toppings.length() > 0 ? toppings.toString() : "None") + "\n"
-                        + "Total Price: ₱" + price;
+                        + "Total Price: ₱" + totalPrice;
 
                 txtOrderSummary.setText(summary);
             }
