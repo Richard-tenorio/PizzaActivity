@@ -62,15 +62,26 @@ class MainActivity : AppCompatActivity() {
                 else -> "Unknown"
             }
 
-            var price = when (size) {
-                "Small" -> 200
-                "Medium" -> 300
-                "Large" -> 400
+            // Updated base price based on pizza type and size
+            val basePrice = when (pizzaType) {
+                "Hawaiian" -> when (size) {
+                    "Small" -> 100
+                    "Medium" -> 150
+                    "Large" -> 200
+                    else -> 0
+                }
+                "Ham and Cheese" -> when (size) {
+                    "Small" -> 200
+                    "Medium" -> 300
+                    "Large" -> 400
+                    else -> 0
+                }
                 else -> 0
             }
 
-            price += when (crust) {
-                "Thick" -> 20
+            // Updated crust pricing (50% of base price for Thick)
+            val crustPrice = when (crust) {
+                "Thick" -> (basePrice * 0.5).toInt()
                 else -> 0
             }
 
@@ -78,12 +89,12 @@ class MainActivity : AppCompatActivity() {
             var toppingCost = 0
 
             if (cbExtraCheese.isChecked) { toppings.add("Extra Cheese"); toppingCost += 20 }
-            if (cbMushrooms.isChecked) { toppings.add("Mushrooms"); toppingCost += 15 }
+            if (cbMushrooms.isChecked) { toppings.add("Mushrooms"); toppingCost += 20 }
             if (cbOnions.isChecked) { toppings.add("Onions"); toppingCost += 10 }
-            if (cbTomatoes.isChecked) { toppings.add("Tomatoes"); toppingCost += 12 }
-            if (cbPineapple.isChecked) { toppings.add("Pineapple"); toppingCost += 18 }
+            if (cbTomatoes.isChecked) { toppings.add("Tomatoes"); toppingCost += 10 }
+            if (cbPineapple.isChecked) { toppings.add("Pineapple"); toppingCost += 15 }
 
-            price += toppingCost
+            val price = basePrice + crustPrice + toppingCost
 
             val summary = """
                 You ordered a $size $pizzaType Pizza
@@ -114,3 +125,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
