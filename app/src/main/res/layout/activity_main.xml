@@ -1,48 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/main"
         android:orientation="vertical"
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Pizza Type -->
-        <TextView android:text="Pizza Type" android:textStyle="bold"/>
-        <Spinner
-            android:id="@+id/spinnerPizza"
-            android:layout_width="match_parent"
+        <TextView
+            android:text="PIZZA APP"
+            android:textSize="24sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <!-- Pizza Type -->
+        <TextView
+            android:text="Pizza Type:"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbHawaiian"
+                android:text="Hawaiian"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rbHamCheese"
+                android:text="Ham and Cheese"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+        </LinearLayout>
+
         <!-- Pizza Size -->
-        <TextView android:text="Size" android:layout_marginTop="8dp" android:textStyle="bold"/>
-        <RadioGroup android:id="@+id/radioGroupSize">
-            <RadioButton android:id="@+id/radioSmall" android:text="Small"/>
-            <RadioButton android:id="@+id/radioMedium" android:text="Medium"/>
-            <RadioButton android:id="@+id/radioLarge" android:text="Large"/>
-        </RadioGroup>
+        <TextView
+            android:text="Pizza Size:"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-        <!-- Crust -->
-        <TextView android:text="Crust" android:layout_marginTop="8dp" android:textStyle="bold"/>
-        <RadioGroup android:id="@+id/radioGroupCrust">
-            <RadioButton android:id="@+id/radioThin" android:text="Thin"/>
-            <RadioButton android:id="@+id/radioThick" android:text="Thick"/>
-            <RadioButton android:id="@+id/radioCheeseStuffed" android:text="Cheese Stuffed"/>
-        </RadioGroup>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <!-- Toppings -->
-        <TextView android:text="Toppings" android:layout_marginTop="8dp" android:textStyle="bold"/>
-        <CheckBox android:id="@+id/checkboxPepperoni" android:text="Pepperoni"/>
-        <CheckBox android:id="@+id/checkboxMushrooms" android:text="Mushrooms"/>
-        <CheckBox android:id="@+id/checkboxOnions" android:text="Onions"/>
-        <CheckBox android:id="@+id/checkboxBacon" android:text="Bacon"/>
+            <RadioButton
+                android:id="@+id/rbSmall"
+                android:text="Small"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rbMedium"
+                android:text="Medium"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rbLarge"
+                android:text="Large"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Crust Type -->
+        <TextView
+            android:text="Crust Type:"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbThin"
+                android:text="Thin"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rbThick"
+                android:text="Thick"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <!-- Extra Toppings -->
+        <TextView
+            android:text="Extra Toppings:"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- First row -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/cbExtraCheese"
+                android:text="Extra Cheese"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/cbMushrooms"
+                android:text="Mushrooms"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/cbOnions"
+                android:text="Onions"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Second row -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/cbTomatoes"
+                android:text="Tomatoes"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/cbPineapple"
+                android:text="Pineapple"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+        </LinearLayout>
 
         <!-- Buttons -->
-        <Button android:id="@+id/btnProcess" android:text="Process Order" android:layout_marginTop="16dp"/>
-        <Button android:id="@+id/btnClear" android:text="Clear" android:layout_marginTop="8dp"/>
+        <Button
+            android:id="@+id/btnProcess"
+            android:text="PROCESS ORDER"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btnNewOrder"
+            android:text="NEW ORDER"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
 
         <!-- Output -->
         <TextView
@@ -50,25 +205,6 @@
             android:layout_marginTop="16dp"
             android:textSize="16sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txtPriceBreakdown"
-            android:text="Price Breakdown:"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txtTotalPrice"
-            android:text="Total: ₱0"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#FF0000"
-            android:layout_marginTop="4dp"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>
