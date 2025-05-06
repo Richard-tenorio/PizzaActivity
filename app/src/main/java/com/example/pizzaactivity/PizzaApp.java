@@ -7,119 +7,123 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class PizzaApp extends AppCompatActivity {
 
-    Spinner spinnerPizza;
-    RadioGroup radioGroupSize, radioGroupCrust;
-    CheckBox checkboxPepperoni, checkboxMushrooms, checkboxOnions, checkboxBacon;
-    Button btnProcess, btnClear;
-    TextView txtOrderSummary, txtPriceBreakdown, txtTotalPrice;
+    RadioButton rbHawaiian, rbHamCheese;
+    RadioButton rbSmall, rbMedium, rbLarge;
+    RadioButton rbThin, rbThick;
+    CheckBox cbExtraCheese, cbMushrooms, cbOnions, cbTomatoes, cbPineapple;
+    Button btnProcess, btnNewOrder;
+    TextView txtOrderSummary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spinnerPizza = findViewById(R.id.spinnerPizza);
-        radioGroupSize = findViewById(R.id.radioGroupSize);
-        radioGroupCrust = findViewById(R.id.radioGroupCrust);
-        checkboxPepperoni = findViewById(R.id.checkboxPepperoni);
-        checkboxMushrooms = findViewById(R.id.checkboxMushrooms);
-        checkboxOnions = findViewById(R.id.checkboxOnions);
-        checkboxBacon = findViewById(R.id.checkboxBacon);
-        btnProcess = findViewById(R.id.btnProcess);
-        btnClear = findViewById(R.id.btnClear);
-        txtOrderSummary = findViewById(R.id.txtOrderSummary);
-        txtPriceBreakdown = findViewById(R.id.txtPriceBreakdown);
-        txtTotalPrice = findViewById(R.id.txtTotalPrice);
+        rbHawaiian = findViewById(R.id.rbHawaiian);
+        rbHamCheese = findViewById(R.id.rbHamCheese);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.pizza_types, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPizza.setAdapter(adapter);
+        rbSmall = findViewById(R.id.rbSmall);
+        rbMedium = findViewById(R.id.rbMedium);
+        rbLarge = findViewById(R.id.rbLarge);
+
+        rbThin = findViewById(R.id.rbThin);
+        rbThick = findViewById(R.id.rbThick);
+
+        cbExtraCheese = findViewById(R.id.cbExtraCheese);
+        cbMushrooms = findViewById(R.id.cbMushrooms);
+        cbOnions = findViewById(R.id.cbOnions);
+        cbTomatoes = findViewById(R.id.cbTomatoes);
+        cbPineapple = findViewById(R.id.cbPineapple);
+
+        btnProcess = findViewById(R.id.btnProcess);
+        btnNewOrder = findViewById(R.id.btnNewOrder);
+
+        txtOrderSummary = findViewById(R.id.txtOrderSummary);
 
         btnProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String pizzaType = spinnerPizza.getSelectedItem().toString();
-                String size = getSelectedRadioText(radioGroupSize);
-                String crust = getSelectedRadioText(radioGroupCrust);
-                String toppings = "";
+                String pizzaType = rbHawaiian.isChecked() ? "Hawaiian" :
+                        rbHamCheese.isChecked() ? "Ham and Cheese" : "Unknown";
 
-                double price = 0;
+                String size = rbSmall.isChecked() ? "Small" :
+                        rbMedium.isChecked() ? "Medium" :
+                                rbLarge.isChecked() ? "Large" : "Unknown";
 
-                // Base price by size
+                String crust = rbThin.isChecked() ? "Thin" :
+                        rbThick.isChecked() ? "Thick" : "Unknown";
+
+                int price = 0;
                 switch (size) {
                     case "Small": price += 200; break;
                     case "Medium": price += 300; break;
                     case "Large": price += 400; break;
                 }
 
-                // Crust price
-                switch (crust) {
-                    case "Thin": price += 0; break;
-                    case "Thick": price += 20; break;
-                    case "Cheese Stuffed": price += 40; break;
+                if (crust.equals("Thick")) {
+                    price += 20;
                 }
 
-                StringBuilder toppingList = new StringBuilder();
-                double toppingCost = 0;
+                StringBuilder toppings = new StringBuilder();
+                int toppingCost = 0;
 
-                if (checkboxPepperoni.isChecked()) {
-                    toppingList.append("Pepperoni, ");
-                    toppingCost += 25;
+                if (cbExtraCheese.isChecked()) {
+                    toppings.append("Extra Cheese, ");
+                    toppingCost += 20;
                 }
-                if (checkboxMushrooms.isChecked()) {
-                    toppingList.append("Mushrooms, ");
+                if (cbMushrooms.isChecked()) {
+                    toppings.append("Mushrooms, ");
                     toppingCost += 15;
                 }
-                if (checkboxOnions.isChecked()) {
-                    toppingList.append("Onions, ");
+                if (cbOnions.isChecked()) {
+                    toppings.append("Onions, ");
                     toppingCost += 10;
                 }
-                if (checkboxBacon.isChecked()) {
-                    toppingList.append("Bacon, ");
-                    toppingCost += 30;
+                if (cbTomatoes.isChecked()) {
+                    toppings.append("Tomatoes, ");
+                    toppingCost += 12;
+                }
+                if (cbPineapple.isChecked()) {
+                    toppings.append("Pineapple, ");
+                    toppingCost += 18;
                 }
 
-                if (toppingList.length() > 0)
-                    toppings = toppingList.substring(0, toppingList.length() - 2); // Remove last comma
+                if (toppings.length() > 0) {
+                    toppings.setLength(toppings.length() - 2); // Remove last comma
+                }
 
                 price += toppingCost;
 
-                String summary = "You ordered a " + size + " " + pizzaType + " pizza\n"
+                String summary = "You ordered a " + size + " " + pizzaType + " Pizza\n"
                         + "Crust: " + crust + "\n"
-                        + "Toppings: " + (toppings.isEmpty() ? "None" : toppings);
+                        + "Toppings: " + (toppings.length() > 0 ? toppings.toString() : "None") + "\n"
+                        + "Total Price: ₱" + price;
 
                 txtOrderSummary.setText(summary);
-
-                txtPriceBreakdown.setText("Size: ₱" + (int) (price - toppingCost) +
-                        "\nToppings: ₱" + (int) toppingCost +
-                        "\nCrust: included");
-
-                txtTotalPrice.setText("Total: ₱" + (int) price);
             }
         });
 
-        btnClear.setOnClickListener(new View.OnClickListener() {
+        btnNewOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                spinnerPizza.setSelection(0);
-                radioGroupSize.clearCheck();
-                radioGroupCrust.clearCheck();
-                checkboxPepperoni.setChecked(false);
-                checkboxMushrooms.setChecked(false);
-                checkboxOnions.setChecked(false);
-                checkboxBacon.setChecked(false);
+                rbHawaiian.setChecked(false);
+                rbHamCheese.setChecked(false);
+
+                rbSmall.setChecked(false);
+                rbMedium.setChecked(false);
+                rbLarge.setChecked(false);
+
+                rbThin.setChecked(false);
+                rbThick.setChecked(false);
+
+                cbExtraCheese.setChecked(false);
+                cbMushrooms.setChecked(false);
+                cbOnions.setChecked(false);
+                cbTomatoes.setChecked(false);
+                cbPineapple.setChecked(false);
+
                 txtOrderSummary.setText("");
-                txtPriceBreakdown.setText("Price Breakdown:");
-                txtTotalPrice.setText("Total: ₱0");
             }
         });
-    }
-
-    private String getSelectedRadioText(RadioGroup group) {
-        int selectedId = group.getCheckedRadioButtonId();
-        if (selectedId == -1) return "";
-        RadioButton radioButton = findViewById(selectedId);
-        return radioButton.getText().toString();
     }
 }
